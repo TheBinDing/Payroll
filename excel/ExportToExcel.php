@@ -163,7 +163,7 @@
                     $BrithDay[1] = 'มิถุนายน';
                 }
                 if($BrithDay[1] == '07') {
-                    $BrithDay[1] = 'กรกฏาคม';
+                    $BrithDay[1] = 'กรกฎาคม';
                 }
                 if($BrithDay[1] == '08') {
                     $BrithDay[1] = 'สิงหาคม';
@@ -204,7 +204,7 @@
                     $OpenWork[1] = 'มิถุนายน';
                 }
                 if($OpenWork[1] == '07') {
-                    $OpenWork[1] = 'กรกฏาคม';
+                    $OpenWork[1] = 'กรกฎาคม';
                 }
                 if($OpenWork[1] == '08') {
                     $OpenWork[1] = 'สิงหาคม';
@@ -246,7 +246,7 @@
 						$OutWork[1] = 'มิถุนายน';
 					}
 					if($OutWork[1] == '07') {
-						$OutWork[1] = 'กรกฏาคม';
+						$OutWork[1] = 'กรกฎาคม';
 					}
 					if($OutWork[1] == '08') {
 						$OutWork[1] = 'สิงหาคม';

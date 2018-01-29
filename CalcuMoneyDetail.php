@@ -93,6 +93,8 @@
                 <div class="form-group">
                     <label class="radio-inline" style="width: 100px;"> งวด </label>
                     <?php
+                        $Today = new DateTime();
+                        $Today = $Today->format('d-m-Y');
                         $date = new DateTime();
                         $date = $date->format('Y');
                     ?>

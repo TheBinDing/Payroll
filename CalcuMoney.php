@@ -48,7 +48,7 @@
             <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <h1>
                 <span> คำนวณเงิน </span><br><br>
-                <?php if(($lable == 1 || $lable == 0) && $lable != '') { ?>
+                <?php if(($lable == 1 || $lable == 0 || $lable == 3) && $lable != '') { ?>
                     <!-- <button class="btn btn-success pull-right" id="Report1" style="margin-right: 5px;">ใบสลิป</button>
                     <button class="btn btn-success pull-right" id="Report3" style="margin-right: 5px;">ใบปะหน้าเพิ่มเติม</button>
                     <button class="btn btn-success pull-right" id="Report2" style="margin-right: 5px;">ใบปะหน้า</button> -->
@@ -76,7 +76,9 @@
 								<input type="text" name="Date" id="Date" class="form-control" value="<?php echo date('d-m-Y'); ?>" style="width: 100px;height: 30px;" readonly>
 							</div>
 						</div>
+                        <?php if($_SESSION['Rule'] != 2) { ?>
                         <a class="btn btn-success pull-right" role="button" onClick="cancelAnnounce();">แจ้งยกเลิก</a>
+                        <?php } ?>
 					</div>
                 <?php } if($lable == '2') { ?>
                     <a class="btn btn-success pull-right" style="margin-bottom: 10px;" role="button" onClick="Announce();">แจ้งตัดวีค</a>
@@ -252,7 +254,7 @@
                 $('#tlable').css('color','#00CC00');
             }
             if(lable == 3 ) {
-                text = 'สถานะ : ทำการตัดวีคซ้ำ';
+                text = 'สถานะ : คำนวณเงินแล้ว'+ 'วันที่ตัดวีค : ' +lableDT;
                 $('#tlable').text(text);
                 $('#tlable').css('color','#FF3333');
             }

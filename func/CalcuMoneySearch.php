@@ -757,6 +757,40 @@
             $row_check_report = mssql_fetch_array($query_check_report);
             $check_report = $row_check_report['MT_Status'];
 
+            $dis = explode('-', $Period_Start);
+            $disMonth = ($dis[1] + 1);
+            $disToday = $daies_f[0];
+            if($disMonth == 1) {
+                $disMonth = '01';
+            }
+            if($disMonth == 2) {
+                $disMonth = '02';
+            }
+            if($disMonth == 3) {
+                $disMonth = '03';
+            }
+            if($disMonth == 4) {
+                $disMonth = '04';
+            }
+            if($disMonth == 5) {
+                $disMonth = '05';
+            }
+            if($disMonth == 6) {
+                $disMonth = '06';
+            }
+            if($disMonth == 7) {
+                $disMonth = '07';
+            }
+            if($disMonth == 8) {
+                $disMonth = '08';
+            }
+            if($disMonth == 9) {
+                $disMonth = '09';
+            }
+            if($disMonth == 13) {
+                $disMonth = '01';
+            }
+
             if($check_report == 2) {
                 $report = 2;
             } else {
@@ -767,8 +801,29 @@
                 $lable = '2';
             }
             if($num_check == 2) {
-                $lable = '1';
-                $daies = $DT;
+                // $lable = '1';
+                // $daies = $DT;
+
+                if($period % 2 == 1) {
+                    if($daies_f[0] >= '21') {
+                        $lable = '3';
+                        $daies = $DT;
+                    } else {
+                        $lable = '1';
+                        $daies = $DT;
+                    }
+                }
+                if($period % 2 == 0) {
+                    if($daies_f[1] == $disMonth) {
+                        if($daies_f[0] >= '06') {
+                            $lable = '3';
+                            $daies = $DT;
+                        }
+                    } else {
+                        $lable = '1';
+                        $daies = $DT;
+                    }
+                }
             }
         }
     }

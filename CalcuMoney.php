@@ -76,9 +76,12 @@
 								<input type="text" name="Date" id="Date" class="form-control" value="<?php echo date('d-m-Y'); ?>" style="width: 100px;height: 30px;" readonly>
 							</div>
 						</div>
-                        <?php if($_SESSION['Rule'] != 2) { ?>
-                        <a class="btn btn-success pull-right" role="button" onClick="cancelAnnounce();">แจ้งยกเลิก</a>
-                        <?php } ?>
+                        <?php
+                            if($_SESSION['Rule'] != 2) {
+                                if($lable != 3) {
+                         ?>
+                            <a class="btn btn-success pull-right" role="button" onClick="cancelAnnounce();">แจ้งยกเลิก</a>
+                        <?php } } ?>
 					</div>
                 <?php } if($lable == '2') { ?>
                     <a class="btn btn-success pull-right" style="margin-bottom: 10px;" role="button" onClick="Announce();">แจ้งตัดวีค</a>

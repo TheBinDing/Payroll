@@ -885,6 +885,8 @@
             document.getElementById("BankBranch").style.backgroundColor = '#ddd';
             document.getElementById("AccountNumber").style.backgroundColor = '#ddd';
             document.getElementById("CashCard").style.backgroundColor = '#ddd';
+			$('#BankBranch').val('');
+			$('#AccountNumber').val('');
         });
         $("#Bank2").click(function(){
             $('#Bank').prop('readonly',false);

@@ -10,8 +10,13 @@
     $daies_f = explode('-', $date_f);
 
 	if($daies_f[0] < '6') {
-		$s = '16-12-'.($daies_f[2]-1);
-		$e = '31-12-'.($daies_f[2]-1);
+		if($daies_f[1] == '01') {
+			$s = '16-12-'.($daies_f[2]-1);
+			$e = '31-12-'.($daies_f[2]-1);
+		} else {
+			$s = '16-'.($daies_f[1] - 1).'-'.$daies_f[2];
+			$e = '31-'.($daies_f[1] - 1).'-'.$daies_f[2];
+		}
 	}
     if('6'<=$daies_f[0] && $daies_f[0]<='15') {
         $s = '01-'.$daies_f[1].'-'.$daies_f[2];
@@ -26,6 +31,74 @@
               $e = '31-'.$daies_f[1].'-'.$daies_f[2];
         }
     }
+
+	$daies_fs = explode('-', $s);
+
+	if($daies_fs[1] == 1) {
+		$daies_fs[1] = '01';
+	}
+	if($daies_fs[1] == 2) {
+		$daies_fs[1] = '02';
+	}
+	if($daies_fs[1] == 3) {
+		$daies_fs[1] = '03';
+	}
+	if($daies_fs[1] == 4) {
+		$daies_fs[1] = '04';
+	}
+	if($daies_fs[1] == 5) {
+		$daies_fs[1] = '05';
+	}
+	if($daies_fs[1] == 6) {
+		$daies_fs[1] = '06';
+	}
+	if($daies_fs[1] == 7) {
+		$daies_fs[1] = '07';
+	}
+	if($daies_fs[1] == 8) {
+		$daies_fs[1] = '08';
+	}
+	if($daies_fs[1] == 9) {
+		$daies_fs[1] = '09';
+	}
+	if($daies_fs[1] == 13) {
+		$daies_fs[1] = '12';
+	}
+	$s = $daies_fs[0].'-'.$daies_fs[1].'-'.$daies_fs[2];
+
+	$daies_fe = explode('-', $e);
+
+	if($daies_fe[1] == 1) {
+		$daies_fe[1] = '01';
+	}
+	if($daies_fe[1] == 2) {
+		$daies_fe[1] = '02';
+	}
+	if($daies_fe[1] == 3) {
+		$daies_fe[1] = '03';
+	}
+	if($daies_fe[1] == 4) {
+		$daies_fe[1] = '04';
+	}
+	if($daies_fe[1] == 5) {
+		$daies_fe[1] = '05';
+	}
+	if($daies_fe[1] == 6) {
+		$daies_fe[1] = '06';
+	}
+	if($daies_fe[1] == 7) {
+		$daies_fe[1] = '07';
+	}
+	if($daies_fe[1] == 8) {
+		$daies_fe[1] = '08';
+	}
+	if($daies_fe[1] == 9) {
+		$daies_fe[1] = '09';
+	}
+	if($daies_fe[1] == 12) {
+		$daies_fe[1] = '12';
+	}
+	$e = $daies_fe[0].'-'.$daies_fe[1].'-'.$daies_fe[2];
 
     $sql_per = "SELECT Per_Week, Per_ID FROM [HRP].[dbo].[Periods] WHERE Per_StartDate = '". $s ."' AND Per_EndDate = '". $e ."' ";
     $query_per = mssql_query($sql_per);
@@ -423,7 +496,10 @@
                         if($daies_f[0] >= '06') {
                             $lable = '3';
                             $daies = $DT;
-                        }
+                        } else {
+							$lable = '1';
+							$daies = $DT;
+						}
                     } else {
                         $lable = '1';
                         $daies = $DT;
@@ -818,7 +894,10 @@
                         if($daies_f[0] >= '06') {
                             $lable = '3';
                             $daies = $DT;
-                        }
+                        } else {
+							$lable = '1';
+							$daies = $DT;
+						}
                     } else {
                         $lable = '1';
                         $daies = $DT;

@@ -62,12 +62,12 @@
                         </div>
 
                         <div class="form-group required ">
-                            <label>รหัสเข้าใช้งาน</label>
+                            <label>รหัสเข้าใช้งานใหม่</label>
                             <input type="password" id="password" name="password" class="form-control">
                         </div>
 
                         <div class="form-group required ">
-                            <label>ยืนยันรหัสเข้าใช้งาน</label>
+                            <label>ยืนยันรหัสเข้าใช้งานใหม่</label>
                             <input type="password" id="confirm" name="confirm" class="form-control">
                         </div>
 

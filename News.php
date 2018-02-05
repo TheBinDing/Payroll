@@ -88,9 +88,12 @@
 
                                                 $ff = explode('.', $file);
 
+												
                                                 if($ff[1] == 'pdf') {
                                                     $fileI = 'img/pdf.png';
-                                                }
+                                                } else {
+													$fileI = 'img/pdf.png';
+												}
                                                 if($ff[1] == 'xlsx') {
                                                     $fileI = 'img/excel.png';
                                                 }

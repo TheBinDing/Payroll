@@ -721,7 +721,7 @@
                         }
                 $sql .= ") as e
                 WHERE
-                    rownum >= '". $limitStart ."' AND rownum <= '". $limitEnd ."' ";
+                    rownum > '". $limitStart ."' AND rownum <= '". $limitEnd ."' ";
 
         $query = mssql_query($sql);
         $response = array();

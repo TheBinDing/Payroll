@@ -45,6 +45,12 @@ switch ($mode)
     case 'load_employee_ae' :
         $response = load_employee_ae($arr);
     break;
+    case 'load_employee' :
+        $response = load_employee($arr);
+    break;
+    case 'load_num_employee' :
+        $response = load_num_employee($arr);
+    break;
     case 'sendAnnounce' :
         $response = sendAnnounce($arr);
     break;

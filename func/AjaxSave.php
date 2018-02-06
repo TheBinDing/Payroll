@@ -662,7 +662,117 @@
             $response[] = $row;
         }
 
+        mssql_free_result($query);
         return js_thai_encode($response);
+        // return $sql;
+    }
+
+    function load_employee($arr) {
+        $limitPage = $arr['page'];
+        $limitStart = ($arr['num'] > 1) ? ($arr['num']-1)*($limitPage) : 0 ;
+        $limitEnd = ($arr['num'] > 1) ? ($limitPage * $arr['num']) : $limitPage;
+
+        $sql = "SELECT
+                    Em_ID,
+                    Em_Pic,
+                    Em_Titel,
+                    Em_Status,
+                    Socie,
+                    CAST(Em_Fullname AS Text) AS Fullname,
+                    CAST(Em_Lastname AS Text) AS Lastname,
+                    CAST(Em_Card AS Text) AS Card,
+                    CAST(Site_Name AS Text) AS Site_Name,
+                    CAST(Group_Name AS Text) AS Group_Name,
+                    CAST(Pos_Name AS Text) AS Pos_Name
+                FROM
+                (
+                    SELECT
+                        ROW_NUMBER() OVER (ORDER BY Em_ID DESC) AS rownum,
+                        Em_ID,
+                        Em_Pic,
+                        Em_Titel,
+                        Em_Status,
+                        Socie,
+                        Em_Fullname,
+                        Em_Lastname,
+                        Em_Card,
+                        Site_Name,
+                        Group_Name,
+                        Pos_Name
+                    FROM
+                        [HRP].[dbo].[Employees] AS E,
+                        [HRP].[dbo].[Sites] AS S,
+                        [HRP].[dbo].[Group] AS G,
+                        [HRP].[dbo].[Position] AS P
+                    WHERE
+                        E.Site_ID = S.Site_ID
+                        AND E.Group_ID = G.Group_ID
+                        AND E.Pos_ID = P.Pos_ID
+                        AND E.Em_Status = '". $arr['status'] ."' ";
+                        if($arr['site'] != '' && $arr['site'] != '1') {
+                            $sql .= "AND S.Site_ID = '". $arr['site'] ."' ";
+                        }
+                        if($arr['id'] != '') {
+                            $sql .= "AND E.Em_ID = '". $arr['id'] ."' ";
+                        }
+                        if($arr['name'] != '') {
+                            $name = $Fullname = iconv('UTF-8','TIS-620', $arr['name']);
+                            $sql .= "AND (E.Em_Fullname like '%". $name ."%' or E.Em_Lastname like '%". $name ."%' or S.Site_Name like '%". $name ."%' or P.Pos_Name like '%". $name ."%' or G.Group_Name like '%". $name ."%') ";
+                        }
+                $sql .= ") as e
+                WHERE
+                    rownum >= '". $limitStart ."' AND rownum <= '". $limitEnd ."' ";
+
+        $query = mssql_query($sql);
+        $response = array();
+        while ($row = mssql_fetch_array($query))
+        {
+            $response[] = $row;
+        }
+        mssql_free_result($query);
+        return js_thai_encode($response);
+        // return $sql;
+    }
+
+    function load_num_employee($arr) {
+        $sql = "SELECT
+                        ROW_NUMBER() OVER (ORDER BY Em_ID DESC) AS rownum,
+                        Em_ID,
+                        Em_Pic,
+                        Em_Titel,
+                        Em_Status,
+                        Socie,
+                        CAST(Em_Fullname AS Text) AS Fullname,
+                        CAST(Em_Lastname AS Text) AS Lastname,
+                        CAST(Em_Card AS Text) AS Card,
+                        CAST(Site_Name AS Text) AS Site_Name,
+                        CAST(Group_Name AS Text) AS Group_Name,
+                        CAST(Pos_Name AS Text) AS Pos_Name
+                    FROM
+                        [HRP].[dbo].[Employees] AS E,
+                        [HRP].[dbo].[Sites] AS S,
+                        [HRP].[dbo].[Group] AS G,
+                        [HRP].[dbo].[Position] AS P
+                    WHERE
+                        E.Site_ID = S.Site_ID
+                        AND E.Group_ID = G.Group_ID
+                        AND E.Pos_ID = P.Pos_ID
+                        AND E.Em_Status = '". $arr['status'] ."' ";
+                if($arr['site'] != '' && $arr['site'] != '1') {
+                    $sql .= "AND S.Site_ID = '". $arr['site'] ."' ";
+                }
+                if($arr['id'] != '') {
+                    $sql .= "AND E.Em_ID = '". $arr['id'] ."' ";
+                }
+                if($arr['name'] != '') {
+                    $name = $Fullname = iconv('UTF-8','TIS-620', $arr['name']);
+                    $sql .= "AND (E.Em_Fullname like '%". $name ."%' or E.Em_Lastname like '%". $name ."%' or S.Site_Name like '%". $name ."%' or P.Pos_Name like '%". $name ."%' or G.Group_Name like '%". $name ."%') ";
+                }
+
+        $query = mssql_query($sql);
+        $num = mssql_num_rows($query);
+        mssql_free_result($query);
+        return $num;
         // return $sql;
     }
 

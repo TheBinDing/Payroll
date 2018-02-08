@@ -71,7 +71,10 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <?php
-                        $sql_y = " SELECT MT_Year AS Year FROM [HRP].[dbo].[MoneyTotal] WHERE Site_ID = '". $_SESSION['SuperSite'] ."' GROUP BY MT_Year ORDER BY MT_Year ";
+                        if($_SESSION['SuperSite'] != 1) {
+                            $where = " WHERE Site_ID = '". $_SESSION['SuperSite'] ."' ";
+                        }
+                        $sql_y = " SELECT MT_Year AS Year FROM [HRP].[dbo].[MoneyTotal] $where GROUP BY MT_Year ORDER BY MT_Year ";
                         $query_y = mssql_query($sql_y);
                         $num_y = mssql_num_rows($query_y);
                     ?>
